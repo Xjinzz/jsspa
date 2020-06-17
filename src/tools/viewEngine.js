@@ -24,19 +24,19 @@ export default class ViewEngine {
         })
     }
     addView (view) {
-        // 卸载style
-        this.unBindCss()
-        // 卸载 js
-        this.unBindScript()
         const domManage = new DomManage()
         domManage.appendDomFromFlie(this._rootDom, view)
         this._templateList.push(view)
     }
     addStyle (url) {
+        // 卸载上一次
+        this.unBindCss()
         Util.loadfile(url, 'css')
         this._cssList.push(url)
     }
     addScript (url) {
+        // 卸载上一次
+        this.unBindScript()
         Util.loadfile(url, 'js')
         this._jsList.push(url)
     }

@@ -31,13 +31,16 @@ export default class SpaEngine {
     // 定义全局eventpublish
     registerEvent () {
         Utils._event.on(Define.VIEW.RENDERVIEW, (currentRoute) => {
-            this._view.addView(currentRoute.view)
             currentRoute.static.css.forEach((item) => {
                 this._view.addStyle(item)
             })
             currentRoute.static.js.forEach((item) => {
                 this._view.addScript(item)
             })
+            // TODO: 需要等待全部资源加载完毕，暂时用timeout
+            setTimeout(() => {
+                this._view.addView(currentRoute.view)
+            }, 100)
         })
     }
 }
